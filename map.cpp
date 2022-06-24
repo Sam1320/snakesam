@@ -1,6 +1,7 @@
 #include "map.h"
 #include <iostream>
 #include "snake.h"
+#include <chrono>
 
 using namespace std;
 
@@ -9,6 +10,7 @@ Map::Map(Snake *snake)
 	this->snake = snake;
 	clear_map(this->map_array);
 	snake_food = pair<int, int>(4,4);
+	begin = std::chrono::steady_clock::now();
 }
 
 void Map::draw(void)
@@ -20,8 +22,16 @@ void Map::draw(void)
 	{
 		cout << endl;
 	}
-
+	
+	end = std::chrono::steady_clock::now();
+	auto elapsed = std::chrono::duration_cast<std::chrono::seconds>(end - begin).count();
 	// draw food
+	if (elapsed > FOOD_TIME) {
+		map_array[snake_food.first][snake_food.second] = ' ';
+		snake_food = pair<int, int>(rand()%(MAP_WIDTH-2)+1, rand()%(MAP_HEIGHT-2) +1 );
+		begin = std::chrono::steady_clock::now();
+	}
+		
 	this->map_array[snake_food.first][snake_food.second] = FOOD_CHAR;
 	if (snake->food_eaten == 1) {
 		snake_food = pair<int, int>(rand()%MAP_WIDTH, rand()%MAP_HEIGHT);
@@ -41,8 +51,7 @@ void Map::draw(void)
 	    for (int j = 0; j < MAP_WIDTH; j++)
 	    {
 		cout << this->map_array[i][j] << " ";
-	    }
-	    cout << endl;
+	    } cout << endl;
 	}
 }
 
