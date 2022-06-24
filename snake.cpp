@@ -42,16 +42,16 @@ void Snake::update_movement(Map *map)
 	switch (direction)
 	{
 		case East:
-			new_head = pair<int, int>(head.first, (head.second +1)%(MAP_WIDTH-1));
+			new_head = pair<int, int>(head.first, (head.second +1));
 			break;
 		case North:
-			new_head = pair<int, int>((MAP_HEIGHT + (head.first-1)%MAP_HEIGHT) %MAP_HEIGHT, head.second);
+			new_head = pair<int, int>(head.first-1, head.second);
 			break;
 		case West:
-			new_head = pair<int, int>(head.first, (((head.second -1)%MAP_WIDTH)+MAP_WIDTH)%MAP_WIDTH);
+			new_head = pair<int, int>(head.first, head.second -1);
 			break;
 		case South:
-			new_head = pair<int, int>((head.first +1)%(MAP_HEIGHT-1), head.second);
+			new_head = pair<int, int>(head.first +1, head.second);
 			break;
 			
 	}
@@ -67,7 +67,7 @@ void Snake::update_movement(Map *map)
 		occupation_array[tail.first][tail.second]--;
 		body.erase(body.begin());
 	}
-	if ((occupation_array[new_head.first][new_head.second] > 1) || new_head.first == 0 || new_head.first == MAP_HEIGHT || new_head.second == 0 || new_head.second == MAP_WIDTH)
+	if ((occupation_array[new_head.first][new_head.second] > 1) || new_head.first == 0 || new_head.first == (MAP_HEIGHT-1) || new_head.second == 0 || new_head.second == (MAP_WIDTH-1))
 		alive = false;
 
 
