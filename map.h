@@ -12,6 +12,7 @@ public:
 	Map(Snake *snake);
 	void draw();
 	pair<int, int> snake_food;
+	int score;
 private:
 	char map_array[MAP_HEIGHT][MAP_WIDTH];
 	Snake *snake;

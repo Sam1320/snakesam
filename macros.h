@@ -9,6 +9,6 @@
 #define PAUSE_LENGTH 1000* 100 // 200 milliseconds
 #define SNAKE_CHAR 'o'
 #define FOOD_CHAR '*'
-#define FOOD_TIME 1 // seconds
+#define FOOD_TIME 2 // seconds
 
 #endif

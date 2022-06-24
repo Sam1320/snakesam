@@ -11,6 +11,7 @@ Map::Map(Snake *snake)
 	clear_map(this->map_array);
 	snake_food = pair<int, int>(4,4);
 	begin = std::chrono::steady_clock::now();
+	score = 0;
 }
 
 void Map::draw(void)
@@ -36,6 +37,7 @@ void Map::draw(void)
 	if (snake->food_eaten == 1) {
 		snake_food = pair<int, int>(rand()%MAP_WIDTH, rand()%MAP_HEIGHT);
 		snake->food_eaten = 0;
+		score++;
 	}
 
 	// draw the snake's body in the map

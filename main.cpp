@@ -14,6 +14,7 @@ void start_game()
 	{
 		map.draw();
 		snake.update_movement(&map);
+		std::cout << "SCORE: " << map.score << std::endl;
 		usleep(PAUSE_LENGTH);
 	}
 	std::cout << "GAME OVER!" << std::endl;	
