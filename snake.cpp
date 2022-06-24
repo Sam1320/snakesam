@@ -42,7 +42,7 @@ void Snake::update_movement(Map *map)
 	switch (direction)
 	{
 		case East:
-			new_head = pair<int, int>(head.first, (head.second +1)%MAP_WIDTH);
+			new_head = pair<int, int>(head.first, (head.second +1)%(MAP_WIDTH-1));
 			break;
 		case North:
 			new_head = pair<int, int>((MAP_HEIGHT + (head.first-1)%MAP_HEIGHT) %MAP_HEIGHT, head.second);
@@ -51,7 +51,7 @@ void Snake::update_movement(Map *map)
 			new_head = pair<int, int>(head.first, (((head.second -1)%MAP_WIDTH)+MAP_WIDTH)%MAP_WIDTH);
 			break;
 		case South:
-			new_head = pair<int, int>((head.first +1)%MAP_HEIGHT, head.second);
+			new_head = pair<int, int>((head.first +1)%(MAP_HEIGHT-1), head.second);
 			break;
 			
 	}
@@ -60,16 +60,16 @@ void Snake::update_movement(Map *map)
 	body.push_back(new_head);
 	occupation_array[new_head.first][new_head.second]++;
 	//pair<int, int> tail = body.front();
-	if (map->snake_food == head){
+	if (map->snake_food == head)
 		food_eaten = 1;
-	}
 	else {
 		pair<int, int> tail = body.front();
 		occupation_array[tail.first][tail.second]--;
 		body.erase(body.begin());
 	}
-	if (occupation_array[new_head.first][new_head.second] > 1)
+	if ((occupation_array[new_head.first][new_head.second] > 1) || new_head.first == 0 || new_head.first == MAP_HEIGHT || new_head.second == 0 || new_head.second == MAP_WIDTH)
 		alive = false;
+
 
 }
 

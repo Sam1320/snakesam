@@ -12,8 +12,8 @@ void start_game()
 {
 	while (snake.alive)
 	{
-		snake.update_movement(&map);
 		map.draw();
+		snake.update_movement(&map);
 		usleep(PAUSE_LENGTH);
 	}
 	std::cout << "GAME OVER!" << std::endl;	
